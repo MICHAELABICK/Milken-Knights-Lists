@@ -8,7 +8,7 @@ DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/lists.db")
 class Note  
   include DataMapper::Resource  
   property :id, Serial  
-  property :content, Text, :required => true  
+  property :content, Text, :required => true
   property :complete, Boolean, :required => true, :default => false  
   property :created_at, DateTime  
   property :updated_at, DateTime
@@ -24,7 +24,7 @@ end
 
 post '/' do  
   n = Note.new  
-  n.content = params[:content]  
+  n.content = params[:content] 
   n.created_at = Time.now  
   n.updated_at = Time.now  
   n.save  
@@ -33,7 +33,7 @@ end
 
 get '/:id' do  
   @note = Note.get params[:id]  
-  @title = "Edit note ##{params[:id]}"  
+  @title = "Task ##{params[:id]}"  
   erb :edit  
 end
 
@@ -48,7 +48,7 @@ end
 
 get '/:id/delete' do  
   @note = Note.get params[:id]  
-  @title = "Confirm deletion of note ##{params[:id]}"  
+  @title = "Delete task ##{params[:id]}"  
   erb :delete  
 end
 
@@ -56,4 +56,4 @@ delete '/:id' do
   n = Note.get params[:id]  
   n.destroy  
   redirect '/'  
-end  
+end
