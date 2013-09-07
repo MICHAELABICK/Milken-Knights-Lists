@@ -1,9 +1,9 @@
-<section id="add">  
+<div id="add">  
   <form action="/" method="post">  
     <input type="text" name="content">  
-    <input type="submit" value="Add Task">  
+    <input type="submit" value="Add Task" style="position: absolute; left: -9999px; width: 1px; height: 1px;">  
   </form>
-</section>
+</div>
 
 <% @notes.each do |note| %>  
   <article <%= 'class="complete"' if note.complete %>>
@@ -16,9 +16,5 @@
 <% end %>    
 
 <div id="tasks">
-	<h2>Prototyping</h2>
-	<h2>Design</h2>
-	<h2>Electrical</h2>
-	<h2>Programming</h2>
-	<h2>Business</h2>
+	
 </div>

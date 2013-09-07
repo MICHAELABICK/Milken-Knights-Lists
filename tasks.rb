@@ -1,25 +1,25 @@
-# lists.rb
+# tasks.rb
 
 require 'sinatra'  
 require 'data_mapper'
 
-DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/lists.db")  
+DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/tasks.db")  
   
 class Note  
-  include DataMapper::Resource  
-  property :id, Serial  
-  property :content, Text, :required => true
-  property :complete, Boolean, :required => true, :default => false  
-  property :created_at, DateTime  
-  property :updated_at, DateTime
-end  
+	include DataMapper::Resource  
+	property :id, Serial  
+	property :content, Text, :required => true
+	property :complete, Boolean, :required => true, :default => false  
+	property :created_at, DateTime  
+	property :updated_at, DateTime
+end
   
 DataMapper.finalize.auto_upgrade!
 
 get '/' do
   @notes = Note.all :order =>:id.desc
   @title = 'Dashboard'
-  erb :home
+  erb :dashboard
 end
 
 post '/' do  
@@ -56,4 +56,4 @@ delete '/:id' do
   n = Note.get params[:id]  
   n.destroy  
   redirect '/'  
-end
+end 
