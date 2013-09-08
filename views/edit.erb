@@ -1,20 +1,27 @@
-<% if @note %>  
-  <form action="/<%= @note.id %>" method="post" id="edit">
-  	<p>
-  		<input type="checkbox" name="complete" <%= "checked" if @note.complete %>>  
-  		<%= @note.content %>
-  		<a href="/">Return</a>
-  	</p>
-  	<p> 
-    	<input type="hidden" name="_method" value="put">  
-    	<textarea name="content"><%= @note.content %></textarea>  
-    </p>
-    <p>
-    	<input type="submit">
-    	<p>Created <%= @note.created_at %></p>
-		<a href="/<%= @note.id %>/delete">Delete</a>
-	</p>  
-  </form>  
+<% if @note %>
+	<%=
+	@notes = Note.all :order =>:id.desc
+	erb :dashboard
+	%>
+	
+ 	<div id="sidepanel">
+		<form action="/<%= @note.id %>" method="post" id="edit">
+		<div>
+			<input type="checkbox" name="complete" <%= "checked" if @note.complete %>>  
+			<h5><%= @note.content %></h5>
+			<a href="/">Return</a>
+		</div>
+		<div> 
+			<input type="hidden" name="_method" value="put">  
+			<textarea name="content"><%= @note.content %></textarea>  
+		</div>
+		<div>
+			<input type="submit">
+			<p>Created <%= @note.created_at %></p>
+			<a href="/<%= @note.id %>/delete">Delete</a>
+		</div>  
+		</form> 
+	</div> 
 <% else %>  
   <p>Note not found.</p>  
-<% end %>  
+<% end %>

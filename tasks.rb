@@ -33,8 +33,8 @@ end
 
 get '/:id' do  
   @note = Note.get params[:id]  
-  @title = "Task ##{params[:id]}"  
-  erb :edit  
+  @title = "#{@note.content}"  
+  erb :edit
 end
 
 put '/:id' do  
@@ -48,7 +48,7 @@ end
 
 get '/:id/delete' do  
   @note = Note.get params[:id]  
-  @title = "Delete task ##{params[:id]}"  
+  @title = "#{@note.content}"  
   erb :delete  
 end
 
@@ -57,3 +57,11 @@ delete '/:id' do
   n.destroy  
   redirect '/'  
 end 
+
+get '/:id/complete' do  
+  n = Note.get params[:id]  
+  n.complete = n.complete ? 0 : 1 # flip it  
+  n.updated_at = Time.now  
+  n.save  
+  redirect '/'  
+end

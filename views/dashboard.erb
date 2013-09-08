@@ -1,20 +1,33 @@
-<div id="add">  
-  <form action="/" method="post">  
-    <input type="text" name="content">  
-    <input type="submit" value="Add Task" style="position: absolute; left: -9999px; width: 1px; height: 1px;">  
-  </form>
-</div>
+<h2>Robotics Tasks</h2>
 
-<% @notes.each do |note| %>  
-  <article <%= 'class="complete"' if note.complete %>>
-  	<div class="task">
-  		<span><a href="/<%= note.id %>/complete">&#8623;</a></span> 
-    	<span><a href="/<%= note.id %>"><%= note.content %></span> 
-    	<span><a href="/<%= note.id %>/delete">Delete</a></span>
-    </div>
-  </article>  
-<% end %>    
+<div id=content>
+	<section id="add">  
+	  <form action="/" method="post">  
+		<input type="text" name="content">  
+		<input type="submit" value="Add Task" style="position: absolute; left: -9999px; width: 1px; height: 1px;">  
+	  </form>
+	</section>
 
-<div id="tasks">
+	<section id="tasks">
+		<% @notes.each do |note| %>  
+			<article>
+				<% if note.complete == false %>
+					<span><a href="/<%= note.id %>/complete">&#8623;</a></span> 
+					<span class="bookmark"></span>
+					<h5><a href="/<%= note.id %>"><%= note.content %></a></h5>
+				<% end %>
+			</article> 
+		<% end %>
 	
+		<h4>Completed Tasks</h4>
+		<% @notes.each do |note| %>  
+			<article class="complete">
+				<% if note.complete == true %>
+					<span><a href="/<%= note.id %>/complete">&#8623;</a></span> 
+					<span class="bookmark"></span>
+					<h5><a href="/<%= note.id %>"><%= note.content %></a></h5>
+				<% end %>
+			</article> 
+		<% end %>  
+	</section>
 </div>
