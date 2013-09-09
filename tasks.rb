@@ -9,7 +9,8 @@ class Note
 	include DataMapper::Resource  
 	property :id, Serial  
 	property :content, Text, :required => true
-	property :complete, Boolean, :required => true, :default => false  
+	property :complete, Boolean, :required => true, :default => false
+	property :description, Text
 	property :created_at, DateTime  
 	property :updated_at, DateTime
 end
@@ -24,7 +25,8 @@ end
 
 post '/' do  
   n = Note.new  
-  n.content = params[:content] 
+  n.content = params[:content]
+  n.description = ''
   n.created_at = Time.now  
   n.updated_at = Time.now  
   n.save  
@@ -40,7 +42,8 @@ end
 put '/:id' do  
   n = Note.get params[:id]  
   n.content = params[:content]  
-  n.complete = params[:complete] ? 1 : 0  
+  n.complete = params[:complete] ? 1 : 0
+  n.description = params[:description] 
   n.updated_at = Time.now  
   n.save  
   redirect '/'  

@@ -4,21 +4,37 @@
 	erb :dashboard
 	%>
 	
- 	<div id="sidepanel">
+ 	<div id="sidebar">
 		<form action="/<%= @note.id %>" method="post" id="edit">
+		<input type="hidden" name="_method" value="put">
 		<div>
 			<input type="checkbox" name="complete" <%= "checked" if @note.complete %>>  
-			<h5><%= @note.content %></h5>
-			<a href="/">Return</a>
+			<h5><textarea name="content"><%= @note.content %></textarea></h5>
 		</div>
-		<div> 
-			<input type="hidden" name="_method" value="put">  
-			<textarea name="content"><%= @note.content %></textarea>  
+		<div id="edit_content">
+			<div id="subdivisions">
+				<h6>Subteam</h6>
+				<select>
+					<option>Prototyping</option>
+					<option>Design</option>
+					<option>Electrical</option>
+					<option>Programming</option>
+					<option>Business</option>
+				</select>
+			</div>
+				<h6>Priority</h6>
+				<select>
+					<option>Low</option>
+					<option>Medium</option>
+					<option>High</option>
+				</select>
+			</div>
+			<textarea name="description"><%= @note.description %></textarea>  
 		</div>
 		<div>
-			<input type="submit">
-			<p>Created <%= @note.created_at %></p>
 			<a href="/<%= @note.id %>/delete">Delete</a>
+			<p>Created <%= @note.created_at %></p>
+			<input type="submit">
 		</div>  
 		</form> 
 	</div> 
