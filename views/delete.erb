@@ -1,13 +1,13 @@
-<% if @note %>  
-  <form action="/<%= @note.id %>" method="post" id="delete">  
-  	<h3>Are you sure you want to delete the following task <em>"<%= @note.content %>"</em>?<h3>
+<% if @task %>  
+  <form action="/<%= @task.id %>" method="post" id="delete">  
+  	<h3>Are you sure you want to delete the following task <em>"<%= @task.content %>"</em>?<h3>
   	<p>You will not be able to undo this action.</p>
   		<div id="input">
-    		<a href="/<%= @note.id %>">Cancel</a>
+    		<a href="/<%= @task.id %>">Cancel</a>
     		<input type="hidden" name="_method" value="delete">  
     		<input type="submit" value="Delete">
     	</div> 
   </form>  
 <% else %>  
-  <p>Note not found.</p>  
+  <p>Task not found.</p>  
 <% end %> 

@@ -16,29 +16,33 @@
 	</section>
 
 	<section id="tasks">
-		<% @notes.each do |note| %>
-			<% if note.complete == false %>
-				<article>
-					<span><a href="/<%= note.id %>/complete">&#8623;</a></span> 
-					<span class="bookmark"></span>
-					<h5><a href="/<%= note.id %>"><%= note.content %></a></h5>
-				</article>
+		<div id="current">
+			<% @tasks.each do |task| %>
+				<% if task.complete == false %>
+					<article>
+						<span><a href="/<%= task.id %>/complete">&#8623;</a></span> 
+						<span class="bookmark"></span>
+						<h5><a href="/<%= task.id %>"><%= task.content %></a></h5>
+					</article>
+				<% end %>
 			<% end %>
-		<% end %>
-		
-		<div>
-			<h4 class="hide-show"><a href="#">Completed Tasks</a></h4>
-			<span class="hide-show"></span>
 		</div>
 		
-		<% @notes.each do |note| %>
-			<% if note.complete == true %>
-				<article class="complete">
-					<span><a href="/<%= note.id %>/complete">&#8623;</a></span> 
-					<span class="bookmark"></span>
-					<h5><a href="/<%= note.id %>"><strike><%= note.content %></strike></a></h5>
-				</article>
+		<div id="complete">
+			<div>
+				<h4 class="hide-show"><a href="#">Completed Tasks</a></h4>
+				<span class="hide-show"></span>
+			</div>
+		
+			<% @tasks.each do |task| %>
+				<% if task.complete == true %>
+					<article class="complete">
+						<span><a href="/<%= task.id %>/complete">&#8623;</a></span> 
+						<span class="bookmark"></span>
+						<h5><a href="/<%= task.id %>"><strike><%= task.content %></strike></a></h5>
+					</article>
+				<% end %>
 			<% end %>
-		<% end %>
+		</div>
 	</section>
 </div>

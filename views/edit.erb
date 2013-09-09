@@ -1,15 +1,15 @@
-<% if @note %>
+<% if @task %>
 	<%=
-	@notes = Note.all :order =>:id.desc
+	@tasks = Task.all :order =>:id.desc
 	erb :dashboard
 	%>
 	
  	<div id="sidebar">
-		<form action="/<%= @note.id %>" method="post" id="edit">
+		<form action="/<%= @task.id %>" method="post" id="edit">
 		<input type="hidden" name="_method" value="put">
 		<div>
-			<input type="checkbox" name="complete" <%= "checked" if @note.complete %>>  
-			<h5><textarea name="content"><%= @note.content %></textarea></h5>
+			<input type="checkbox" name="complete" <%= "checked" if @task.complete %>>  
+			<h5><textarea name="content"><%= @task.content %></textarea></h5>
 		</div>
 		<div id="edit_content">
 			<div id="subdivisions">
@@ -29,15 +29,15 @@
 					<option>High</option>
 				</select>
 			</div>
-			<textarea name="description"><%= @note.description %></textarea>  
+			<textarea name="description"><%= @task.description %></textarea>  
 		</div>
 		<div>
-			<a href="/<%= @note.id %>/delete">Delete</a>
-			<p>Created <%= @note.created_at %></p>
+			<a href="/<%= @task.id %>/delete">Delete</a>
+			<p>Created <%= @task.created_at %></p>
 			<input type="submit">
 		</div>  
 		</form> 
 	</div> 
 <% else %>  
-  <p>Note not found.</p>  
+  <p>Task not found.</p>  
 <% end %>
