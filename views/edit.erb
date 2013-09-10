@@ -1,6 +1,6 @@
 <% if @task %>
 	<%=
-	@tasks = Task.all :order =>:id.desc
+	@task = Task.all :order =>:id.desc
 	erb :dashboard
 	%>
 	

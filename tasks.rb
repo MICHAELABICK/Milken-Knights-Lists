@@ -5,11 +5,12 @@ require 'data_mapper'
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/tasks.db")  
   
-class Note  
+class Task  
 	include DataMapper::Resource  
 	property :id, Serial  
 	property :content, Text, :required => true
 	property :complete, Boolean, :required => true, :default => false
+	property :priority, Text
 	property :description, Text
 	property :created_at, DateTime  
 	property :updated_at, DateTime
@@ -18,53 +19,54 @@ end
 DataMapper.finalize.auto_upgrade!
 
 get '/' do
-  @notes = Note.all :order =>:id.desc
+  @task = Task.all :order =>:id.desc
   @title = 'Dashboard'
   erb :dashboard
 end
 
 post '/' do  
-  n = Note.new  
-  n.content = params[:content]
-  n.description = ''
-  n.created_at = Time.now  
-  n.updated_at = Time.now  
-  n.save  
+  task = Task.new  
+  task.content = params[:content]
+  task.priority = ''
+  task.description = ''
+  task.created_at = Time.now
+  task.updated_at = Time.now  
+  task.save  
   redirect '/'  
 end 
 
 get '/:id' do  
-  @note = Note.get params[:id]  
-  @title = "#{@note.content}"  
+  @task = Task.get params[:id]  
+  @title = "#{@task.content}"  
   erb :edit
 end
 
 put '/:id' do  
-  n = Note.get params[:id]  
-  n.content = params[:content]  
-  n.complete = params[:complete] ? 1 : 0
-  n.description = params[:description] 
-  n.updated_at = Time.now  
-  n.save  
+  task = Task.get params[:id]  
+  task.content = params[:content]  
+  task.complete = params[:complete] ? 1 : 0
+  task.description = params[:description] 
+  task.updated_at = Time.now  
+  task.save  
   redirect '/'  
 end
 
 get '/:id/delete' do  
-  @note = Note.get params[:id]  
-  @title = "#{@note.content}"  
+  @task = Task.get params[:id]  
+  @title = "#{@task.content}"  
   erb :delete  
 end
 
 delete '/:id' do  
-  n = Note.get params[:id]  
-  n.destroy  
+  task = Task.get params[:id]  
+  task.destroy  
   redirect '/'  
 end 
 
 get '/:id/complete' do  
-  n = Note.get params[:id]  
-  n.complete = n.complete ? 0 : 1 # flip it  
-  n.updated_at = Time.now  
-  n.save  
+  task = Task.get params[:id]  
+  task.complete = task.complete ? 0 : 1 # flip it  
+  task.updated_at = Time.now  
+  task.save  
   redirect '/'  
 end
