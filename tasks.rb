@@ -11,6 +11,7 @@ class Task
 	property :content, Text, :required => true
 	property :complete, Boolean, :required => true, :default => false
 	property :priority, Text
+	property :subdivision, Text, :required => true
 	property :description, Text
 	property :created_at, DateTime  
 	property :updated_at, DateTime
@@ -19,15 +20,16 @@ end
 DataMapper.finalize.auto_upgrade!
 
 get '/' do
-  @tasks = Task.all :order =>:id.desc
-  @title = 'Dashboard'
-  erb :dashboard
+	@tasks = Task.all :order => :id.desc
+	@title = 'Dashboard'
+	erb :dashboard
 end
 
 post '/' do  
   task = Task.new  
   task.content = params[:content]
   task.priority = ''
+  task.subdivision = params[:subdivision]
   task.description = ''
   task.created_at = Time.now
   task.updated_at = Time.now  

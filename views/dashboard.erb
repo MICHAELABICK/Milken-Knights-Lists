@@ -4,12 +4,12 @@
 	<section id="add">  
 	  <form action="/" method="post">  
 		<input type="text" name="content" placeholder="Add a task to &quot;Robotics&quot;...">
-		<select>
-			<option>Prototyping</option>
-			<option>Design</option>
-			<option>Electrical</option>
-			<option>Programming</option>
-			<option>Business</option>
+		<select name="subdivision">
+			<option value="Prototyping">Prototyping</option>
+			<option value="Design">Design</option>
+			<option value="Electrical">Electrical</option>
+			<option value="Programming">Programming</option>
+			<option value="Business">Business</option>
 		</select>
 		<input type="submit" value="Add Task" style="position: absolute; left: -9999px; width: 1px; height: 1px;">  
 	  </form>
@@ -20,9 +20,15 @@
 			<% @tasks.each do |task| %>
 				<% if task.complete == false %>
 					<article>
-						<span><a href="/<%= task.id %>/complete">&#8623;</a></span> 
-						<span class="bookmark"></span>
-						<h5><a href="/<%= task.id %>"><%= task.content %></a></h5>
+						<div class="labels">
+							
+						</div>
+						
+						<div class="task_content">
+							<span><a href="/<%= task.id %>/complete">&#8623;</a></span> 
+							<h5><a href="/<%= task.id %>"><%= task.content %></a></h5>
+						</div>
+						<p><%= task.subdivision %></p>
 					</article>
 				<% end %>
 			<% end %>
@@ -37,9 +43,14 @@
 			<% @tasks.each do |task| %>
 				<% if task.complete == true %>
 					<article class="complete">
-						<span><a href="/<%= task.id %>/complete">&#8623;</a></span> 
-						<span class="bookmark"></span>
-						<h5><a href="/<%= task.id %>"><strike><%= task.content %></strike></a></h5>
+						<div class="labels">
+							
+						</div>
+						
+						<div class="task_content">
+							<span><a href="/<%= task.id %>/complete">&#8623;</a></span> 
+							<h5><a href="/<%= task.id %>"><strike><%= task.content %></strike></a></h5>
+						</div>
 					</article>
 				<% end %>
 			<% end %>
