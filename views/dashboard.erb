@@ -17,7 +17,7 @@
 
 	<section id="tasks">
 		<div id="current">
-			<% @task.each do |task| %>
+			<% @tasks.each do |task| %>
 				<% if task.complete == false %>
 					<article>
 						<span><a href="/<%= task.id %>/complete">&#8623;</a></span> 
@@ -34,7 +34,7 @@
 				<span class="hide-show"></span>
 			</div>
 		
-			<% @task.each do |task| %>
+			<% @tasks.each do |task| %>
 				<% if task.complete == true %>
 					<article class="complete">
 						<span><a href="/<%= task.id %>/complete">&#8623;</a></span> 

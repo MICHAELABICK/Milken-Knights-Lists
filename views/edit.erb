@@ -1,41 +1,41 @@
 <% if @task %>
 	<%=
-	@task = Task.all :order =>:id.desc
+	@tasks = Task.all :order =>:id.desc
 	erb :dashboard
 	%>
 	
  	<div id="sidebar">
 		<form action="/<%= @task.id %>" method="post" id="edit">
-		<input type="hidden" name="_method" value="put">
-		<div>
-			<input type="checkbox" name="complete" <%= "checked" if @task.complete %>>  
-			<h5><textarea name="content"><%= @task.content %></textarea></h5>
-		</div>
-		<div id="edit_content">
-			<div id="subdivisions">
-				<h6>Subteam</h6>
-				<select>
-					<option>Prototyping</option>
-					<option>Design</option>
-					<option>Electrical</option>
-					<option>Programming</option>
-					<option>Business</option>
-				</select>
+			<input type="hidden" name="_method" value="put">
+			<div>
+				<input type="checkbox" name="complete" <%= "checked" if @task.complete %>>  
+				<h5><textarea name="content"><%= @task.content %></textarea></h5>
 			</div>
-				<h6>Priority</h6>
-				<select>
-					<option>Low</option>
-					<option>Medium</option>
-					<option>High</option>
-				</select>
+			<div id="edit_content">
+				<div id="subdivisions">
+					<h6>Subteam</h6>
+					<select>
+						<option>Prototyping</option>
+						<option>Design</option>
+						<option>Electrical</option>
+						<option>Programming</option>
+						<option>Business</option>
+					</select>
+				</div>
+					<h6>Priority</h6>
+					<select>
+						<option>Low</option>
+						<option>Medium</option>
+						<option>High</option>
+					</select>
+				</div>
+				<textarea name="description"><%= @task.description %></textarea>  
 			</div>
-			<textarea name="description"><%= @task.description %></textarea>  
-		</div>
-		<div>
-			<a href="/<%= @task.id %>/delete">Delete</a>
-			<p>Created <%= @task.created_at %></p>
-			<input type="submit">
-		</div>  
+			<div>
+				<a href="/<%= @task.id %>/delete">Delete</a>
+				<p>Created <%= @task.created_at %></p>
+				<input type="submit">
+			</div>  
 		</form> 
 	</div> 
 <% else %>  

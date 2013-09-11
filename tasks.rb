@@ -19,7 +19,7 @@ end
 DataMapper.finalize.auto_upgrade!
 
 get '/' do
-  @task = Task.all :order =>:id.desc
+  @tasks = Task.all :order =>:id.desc
   @title = 'Dashboard'
   erb :dashboard
 end
