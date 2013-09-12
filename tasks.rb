@@ -22,6 +22,11 @@ post '/' do
   redirect '/'  
 end 
 
+get '/boards' do
+	@title = 'Boards'
+	erb :boards
+end
+
 get '/:id' do  
   @task = Task.get params[:id]  
   @title = "#{@task.content}"  
