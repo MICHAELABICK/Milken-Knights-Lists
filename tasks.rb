@@ -1,23 +1,8 @@
 # tasks.rb
 
-require 'sinatra'  
-require 'data_mapper'
+require 'sinatra'
 
-DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/tasks.db")  
-  
-class Task  
-	include DataMapper::Resource  
-	property :id, Serial  
-	property :content, Text, :required => true
-	property :complete, Boolean, :required => true, :default => false
-	property :priority, Text
-	property :subdivision, Text, :required => true
-	property :description, Text
-	property :created_at, DateTime  
-	property :updated_at, DateTime
-end
-  
-DataMapper.finalize.auto_upgrade!
+require './models' 
 
 get '/' do
 	@tasks = Task.all :order => :id.desc
