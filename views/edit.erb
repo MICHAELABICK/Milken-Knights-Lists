@@ -17,10 +17,10 @@
 					<h6>Subteam</h6>
 					<select name="subdivision">
 						<% @boards.each do |board| %>
-							<% if @task.subdivision == "#{board.name}" %>
-								<option value="<%= board.name %>" selected><%= board.name %></option>
+							<% if @task.subdivision == "#{board.id}" %>
+								<option value="<%= board.id %>" selected><%= board.name %></option>
 							<% else %>
-								<option value="<%= board.name %>"><%= board.name %></option>
+								<option value="<%= board.id %>"><%= board.name %></option>
 							<% end %>
 						<% end %>
 					</select>

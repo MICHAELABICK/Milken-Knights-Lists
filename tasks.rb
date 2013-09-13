@@ -17,16 +17,17 @@ get '/' do
 	erb :dashboard
 end
 
-post '/' do  
-  task = Task.new  
-  task.content = params[:content]
-  task.priority = ''
-  task.subdivision = params[:subdivision]
-  task.description = ''
-  task.created_at = Time.now
-  task.updated_at = Time.now  
-  task.save  
-  redirect '/'  
+post '/' do
+	board = Board.get params[:board_id]
+	task = board.task.new  
+	task.content = params[:content]
+	task.priority = ''
+	task.subdivision = params[:board_id]
+	task.description = ''
+	task.created_at = Time.now
+	task.updated_at = Time.now
+	board.save
+	redirect '/'  
 end 
 
 get '/boards' do
