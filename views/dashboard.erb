@@ -5,11 +5,9 @@
 	  <form action="/" method="post">  
 		<input type="text" name="content" placeholder="Add a task to &quot;Robotics&quot;...">
 		<select name="subdivision">
-			<option value="Prototyping">Prototyping</option>
-			<option value="Design">Design</option>
-			<option value="Electrical">Electrical</option>
-			<option value="Programming">Programming</option>
-			<option value="Business">Business</option>
+			<% @boards.each do |board| %>
+				<option value="<%= board.name %>"><%= board.name %></option>
+			<% end %>
 		</select>
 		<input type="submit" value="Add task" style="position: absolute; left: -9999px; width: 1px; height: 1px;">  
 	  </form>

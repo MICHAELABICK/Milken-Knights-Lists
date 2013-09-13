@@ -12,6 +12,7 @@ business = Board.first_or_create(:name => 'Business')
 
 get '/' do
 	@tasks = Task.all :order => :id.desc
+	@boards = Board.all :order => :id.asc
 	@title = 'Dashboard'
 	erb :dashboard
 end
@@ -29,7 +30,7 @@ post '/' do
 end 
 
 get '/boards' do
-	@boards = Board.all :order => :id.desc
+	@boards = Board.all :order => :id.asc
 	@title = 'Boards'
 	erb :boards
 end
