@@ -4,6 +4,12 @@ require 'sinatra'
 
 require './models' 
 
+prototyping = Board.first_or_create(:name => 'Prototyping')
+design = Board.first_or_create(:name => 'Design')
+electrical = Board.first_or_create(:name => 'Electrical')
+programming = Board.first_or_create(:name => 'Programming')
+business = Board.first_or_create(:name => 'Business')
+
 get '/' do
 	@tasks = Task.all :order => :id.desc
 	@title = 'Dashboard'
@@ -23,9 +29,17 @@ post '/' do
 end 
 
 get '/boards' do
+	@boards = Board.all :order => :id.desc
 	@title = 'Boards'
 	erb :boards
 end
+
+post '/boards' do  
+	board = Board.new
+	board.name = params[:name]
+	board.save
+	redirect '/boards'  
+end 
 
 get '/:id' do  
   @task = Task.get params[:id]  

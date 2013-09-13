@@ -8,4 +8,6 @@ class Task
 	property :description, Text
 	property :created_at, DateTime  
 	property :updated_at, DateTime
+	
+	belongs_to :board, :required => false
 end
