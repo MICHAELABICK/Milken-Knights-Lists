@@ -15,12 +15,14 @@
 			<div id="edit_content">
 				<div id="subdivisions">
 					<h6>Subteam</h6>
-					<select>
-						<option>Prototyping</option>
-						<option>Design</option>
-						<option>Electrical</option>
-						<option>Programming</option>
-						<option>Business</option>
+					<select name="subdivision">
+						<% @boards.each do |board| %>
+							<% if @task.subdivision == "#{board.name}" %>
+								<option value="<%= board.name %>" selected><%= board.name %></option>
+							<% else %>
+								<option value="<%= board.name %>"><%= board.name %></option>
+							<% end %>
+						<% end %>
 					</select>
 				</div>
 					<h6>Priority</h6>

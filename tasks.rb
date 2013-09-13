@@ -43,7 +43,8 @@ post '/boards' do
 end 
 
 get '/:id' do  
-  @task = Task.get params[:id]  
+  @task = Task.get params[:id]
+  @boards = Board.all :order => :id.asc 
   @title = "#{@task.content}"  
   erb :edit
 end

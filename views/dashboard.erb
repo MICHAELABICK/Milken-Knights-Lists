@@ -15,19 +15,24 @@
 
 	<section id="tasks">
 		<div id="current">
-			<% @tasks.each do |task| %>
-				<% if task.complete == false %>
-					<article>
-						<div class="labels">
+			<% @boards.each do |board| %>
+				<h3><%= board.name %></h3>
+				
+				<% @tasks.each do |task| %>
+					<% if task.complete == false %>
+						<% if task.subdivision == "#{board.name}" %>
+							<article>
+								<div class="labels">
 							
-						</div>
+								</div>
 						
-						<div class="task_content">
-							<span><a href="/<%= task.id %>/complete">&#8623;</a></span> 
-							<h5><a href="/<%= task.id %>"><%= task.content %></a></h5>
-						</div>
-						<p><%= task.subdivision %></p>
-					</article>
+								<div class="task_content">
+									<span><a href="/<%= task.id %>/complete">&#8623;</a></span> 
+									<h5><a href="/<%= task.id %>"><%= task.content %></a></h5>
+								</div>
+							</article>
+						<% end %>
+					<% end %>
 				<% end %>
 			<% end %>
 		</div>
@@ -41,10 +46,6 @@
 			<% @tasks.each do |task| %>
 				<% if task.complete == true %>
 					<article class="complete">
-						<div class="labels">
-							
-						</div>
-						
 						<div class="task_content">
 							<span><a href="/<%= task.id %>/complete">&#8623;</a></span> 
 							<h5><a href="/<%= task.id %>"><strike><%= task.content %></strike></a></h5>
