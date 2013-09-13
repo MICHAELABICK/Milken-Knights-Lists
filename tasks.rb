@@ -22,7 +22,6 @@ post '/' do
 	task = board.task.new  
 	task.content = params[:content]
 	task.priority = ''
-	task.subdivision = params[:board_id]
 	task.description = ''
 	task.created_at = Time.now
 	task.updated_at = Time.now
