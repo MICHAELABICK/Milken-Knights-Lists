@@ -1,0 +1,18 @@
+<div id="content">
+	<h2>Boards</h2>
+
+	<section id="add_board">  
+	  <form action="/boards" method="post">  
+		<input type="text" name="name" placeholder="Add a board...">
+		<input type="submit" value="Save"">  
+	  </form>
+	</section>
+
+	<section id="boards">
+		<% @boards.each do |board| %>
+			<div class="board">
+				<h3><%= board.name %></h5>
+			</div>
+		<% end %>
+	</section>
+</div>

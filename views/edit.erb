@@ -1,11 +1,46 @@
-<% if @note %>  
-  <form action="/<%= @note.id %>" method="post" id="edit">  
-    <input type="hidden" name="_method" value="put">  
-    <textarea name="content"><%= @note.content %></textarea>  
-    <input type="checkbox" name="complete" <%= "checked" if @note.complete %>>  
-    <input type="submit">  
-  </form>  
-  <p><a href="/<%= @note.id %>/delete">Delete</a></p>  
+<% if @task %>
+	<%=
+	@tasks = Task.all :order =>:id.desc
+	@boards = Board.all :order => :id.asc
+	erb :dashboard
+	%>
+	
+ 	<div id="sidebar">
+		<form action="/<%= @task.id %>" method="post" id="edit">
+			<input type="hidden" name="_method" value="put">
+			<div>
+				<input type="checkbox" name="complete" <%= "checked" if @task.complete %>>  
+				<h5><textarea name="content"><%= @task.content %></textarea></h5>
+			</div>
+			<div id="edit_content">
+				<div id="board">
+					<h6>Subteam</h6>
+					<select name="board_id">
+						<% @boards.each do |board| %>
+							<% if @task.board.id == board.id %>
+								<option value="<%= board.id %>" selected><%= board.name %></option>
+							<% else %>
+								<option value="<%= board.id %>"><%= board.name %></option>
+							<% end %>
+						<% end %>
+					</select>
+				</div>
+					<h6>Priority</h6>
+					<select>
+						<option>Low</option>
+						<option>Medium</option>
+						<option>High</option>
+					</select>
+				</div>
+				<textarea name="description"><%= @task.description %></textarea>  
+			</div>
+			<div>
+				<a href="/<%= @task.id %>/delete">Delete</a>
+				<p>Created <%= @task.created_at %></p>
+				<input type="submit">
+			</div>  
+		</form> 
+	</div> 
 <% else %>  
-  <p>Note not found.</p>  
-<% end %>  
+  <p>Task not found.</p>  
+<% end %>
