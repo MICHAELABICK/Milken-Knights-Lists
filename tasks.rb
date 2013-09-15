@@ -11,8 +11,8 @@ programming = Board.first_or_create(:name => 'Programming')
 business = Board.first_or_create(:name => 'Business')
 
 low = Priority.first_or_create(:level => 'Low')
-medium = Priority.first_or_create(:level => 'Medium')
-high = Priority.first_or_create(:level => 'High')
+medium = Priority.first_or_create(:level => 'Medium', :color => '#ff0')
+high = Priority.first_or_create(:level => 'High', :color => '#f00')
 
 get '/' do
 	@boards = Board.all :order => :id.asc

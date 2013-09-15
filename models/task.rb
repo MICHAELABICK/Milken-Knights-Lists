@@ -8,13 +8,14 @@ class Task
 	property :updated_at, DateTime
 	
 	belongs_to :board, :required => false
-	has 1, :priority
+	belongs_to :priority
 end
 	
 class Priority
 	include DataMapper::Resource 
 	property :id, Serial
 	property :level, Text, :required => true
+	property :color, Text
 	
-	belongs_to :task, :required => false
+	has n, :task, :required => false
 end
