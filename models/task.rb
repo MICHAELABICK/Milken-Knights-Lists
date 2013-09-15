@@ -15,6 +15,7 @@ class Priority
 	include DataMapper::Resource 
 	property :id, Serial
 	property :level, Text, :required => true
+	property :color, Text
 	
 	belongs_to :task, :required => false
 end

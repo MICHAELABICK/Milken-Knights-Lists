@@ -22,8 +22,8 @@
 					<% if task.complete == false %>
 						<% if task.board.id == board.id %>
 							<article>
-								<div class="level">
-									<p><%= task.priority.level %></p>
+								<div class="levels">
+									<span class="level" style="color:<%= task.priority.color %>;"><%= task.priority.level %></span>
 								</div>
 						
 								<div class="task_content">
