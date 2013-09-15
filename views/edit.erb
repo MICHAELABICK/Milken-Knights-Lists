@@ -26,10 +26,14 @@
 					</select>
 				</div>
 					<h6>Priority</h6>
-					<select>
-						<option>Low</option>
-						<option>Medium</option>
-						<option>High</option>
+					<select name="priority_id">
+						<% @priorities.each do |priority| %>
+							<% if @task.priority.id == priority.id %>
+								<option value="<%= priority.id %>" selected><%= priority.level %></option>
+							<% else %>
+								<option value="<%= priority.id %>"><%= priority.level %></option>
+							<% end %>
+						<% end %>
 					</select>
 				</div>
 				<textarea name="description"><%= @task.description %></textarea>  

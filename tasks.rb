@@ -10,9 +10,13 @@ electrical = Board.first_or_create(:name => 'Electrical')
 programming = Board.first_or_create(:name => 'Programming')
 business = Board.first_or_create(:name => 'Business')
 
+low = Priority.first_or_create(:level => 'Low')
+medium = Priority.first_or_create(:level => 'Medium')
+high = Priority.first_or_create(:level => 'High')
+
 get '/' do
-	@tasks = Task.all :order => :id.desc
 	@boards = Board.all :order => :id.asc
+	@tasks = Task.all :order => :id.desc
 	@title = 'Dashboard'
 	erb :dashboard
 end
@@ -21,10 +25,10 @@ post '/' do
 	board = Board.get params[:board_id]
 	task = board.task.new  
 	task.content = params[:content]
-	task.priority = ''
 	task.description = ''
 	task.created_at = Time.now
 	task.updated_at = Time.now
+	task.priority = Priority.get(1)
 	board.save
 	redirect '/'  
 end 
@@ -42,20 +46,22 @@ post '/boards' do
 	redirect '/boards'  
 end 
 
-get '/:id' do  
-  @task = Task.get params[:id]
-  @boards = Board.all :order => :id.asc 
-  @title = "#{@task.content}"  
-  erb :edit
+get '/:id' do
+	@boards = Board.all :order => :id.asc 
+	@task = Task.get params[:id]
+	@priorities = Priority.all :order => :id.asc
+	@title = "#{@task.content}"  
+	erb :edit
 end
 
 put '/:id' do  
-  task = Task.get params[:id]  
+  task = Task.get params[:id] 
+  task.board = Board.get params[:board_id]
   task.content = params[:content]  
   task.complete = params[:complete] ? 1 : 0
-  task.board = Board.get params[:board_id]
   task.description = params[:description] 
-  task.updated_at = Time.now  
+  task.updated_at = Time.now
+  task.priority = Priority.get params[:priority_id]  
   task.save
   redirect '/'  
 end
