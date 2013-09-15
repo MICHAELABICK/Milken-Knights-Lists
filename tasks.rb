@@ -10,6 +10,10 @@ electrical = Board.first_or_create(:name => 'Electrical')
 programming = Board.first_or_create(:name => 'Programming')
 business = Board.first_or_create(:name => 'Business')
 
+low = Priority.first_or_create(:level => 'Low')
+medium = Priority.first_or_create(:level => 'Medium')
+high = Priority.first_or_create(:level => 'High')
+
 get '/' do
 	@tasks = Task.all :order => :id.desc
 	@boards = Board.all :order => :id.asc
@@ -21,7 +25,6 @@ post '/' do
 	board = Board.get params[:board_id]
 	task = board.task.new  
 	task.content = params[:content]
-	task.priority = ''
 	task.description = ''
 	task.created_at = Time.now
 	task.updated_at = Time.now
