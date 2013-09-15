@@ -13,9 +13,9 @@
 				<h5><textarea name="content"><%= @task.content %></textarea></h5>
 			</div>
 			<div id="edit_content">
-				<div id="boards">
+				<div id="board">
 					<h6>Subteam</h6>
-					<select name="board">
+					<select name="board_id">
 						<% @boards.each do |board| %>
 							<% if @task.board.id == board.id %>
 								<option value="<%= board.id %>" selected><%= board.name %></option>

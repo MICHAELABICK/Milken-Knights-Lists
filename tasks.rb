@@ -53,9 +53,10 @@ put '/:id' do
   task = Task.get params[:id]  
   task.content = params[:content]  
   task.complete = params[:complete] ? 1 : 0
+  task.board = Board.get params[:board_id]
   task.description = params[:description] 
   task.updated_at = Time.now  
-  task.save  
+  task.save
   redirect '/'  
 end
 
